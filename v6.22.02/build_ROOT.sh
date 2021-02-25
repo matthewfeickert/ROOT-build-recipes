@@ -1,5 +1,9 @@
 #!/bin/bash
 
+set -e
+set -u
+set -o pipefail
+
 ROOT_VERSION="v6-22-02"
 
 pushd root || exit
