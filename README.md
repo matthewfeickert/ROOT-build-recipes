@@ -13,3 +13,12 @@ So go ahead and clone the [full project from GitHub](https://github.com/root-pro
 ```
 git clone git@github.com:root-project/root.git
 ```
+
+The recipes will additionally assume the installation target directory is `"${HOME}/bin/root` so make sure to add the following to your `.profile` or `.bash_profile`
+
+```bash
+# Add ROOT to PATH
+if [ -d "${HOME}/bin/root/bin" ] ; then
+    . "${HOME}/bin/root/bin/thisroot.sh"
+fi
+```
