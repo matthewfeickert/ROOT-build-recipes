@@ -2,9 +2,9 @@
 
 ROOT_VERSION="v6-22-02"
 
-pushd root
+pushd root || exit
 git checkout "${ROOT_VERSION}" -b "${ROOT_VERSION}-branch"
-popd
+popd || exit
 
 # clean build
 if [ -d "root_build_${ROOT_VERSION}" ]; then
