@@ -35,3 +35,26 @@ This can be done with pyenv by using the `PYTHON_CONFIGURE_OPTS` environmental v
 PYTHON_CONFIGURE_OPTS="--with-ensurepip --enable-optimizations --with-lto --enable-loadable-sqlite-extensions --enable-ipv6 --enable-shared" \
     pyenv install 3.8.7
 ```
+
+## ROOT build
+
+Create a Python virtual environment for the build and install NumPy for ROOT to use
+
+```shell
+$ pyenv virtualenv 3.8.7 ROOT-build
+(ROOT-build) $ python -m pip install --upgrade pip setuptools wheel
+(ROOT-build) $ python -m pip install numpy
+```
+
+Then form the directory containing your clone of ROOT's Git repository run the build script.
+This will checkout the release branch from ROOT and then configure and built but not install (so that validation checks can be performed).
+
+```
+(ROOT-build) $ bash build_ROOT.sh 2>&1 | tee root_build.log
+```
+
+After the build has finished (will probably take on the order of 40 minutes) without errors install it with
+
+```
+(ROOT-build) $ ROOT_VERSION="v6-22-02" cmake --build "root_build_${ROOT_VERSION}" --target install
+```
