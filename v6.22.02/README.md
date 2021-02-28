@@ -36,11 +36,13 @@ PYTHON_CONFIGURE_OPTS="--with-ensurepip --enable-optimizations --with-lto --enab
     pyenv install 3.8.7
 ```
 
-The easiest way to check that a Python runtime has been built with the `--enable-shared` option is to check the value of `Py_ENABLE_SHARED` in `sysconfig`
+The easiest way to check that a Python runtime has been built with the `--enable-shared` option is to check the value of `Py_ENABLE_SHARED` in the [`sysconfig`](https://docs.python.org/3/library/sysconfig.html) module
 
 ```shell
 python -c "import sysconfig; assert sysconfig.get_config_var('Py_ENABLE_SHARED') == 1"
 ```
+
+If this command runs without an `AssertionError` then `--enable-shared` was used during its build.
 
 ## ROOT build
 
