@@ -36,6 +36,12 @@ PYTHON_CONFIGURE_OPTS="--with-ensurepip --enable-optimizations --with-lto --enab
     pyenv install 3.8.7
 ```
 
+The easiest way to check that a Python runtime has been built with the `--enable-shared` option is to check the value of `Py_ENABLE_SHARED` in `sysconfig`
+
+```shell
+python -c "import sysconfig; assert sysconfig.get_config_var('Py_ENABLE_SHARED') == 1"
+```
+
 ## ROOT build
 
 Create a Python virtual environment for the build and install NumPy for ROOT to use
