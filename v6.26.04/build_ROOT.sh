@@ -5,9 +5,9 @@ set -e
 set -u
 set -o pipefail
 
-ROOT_VERSION="v6-22-02"
+ROOT_VERSION="v6-26-04"
 
-pushd root || exit
+pushd root_src || exit
 git checkout "${ROOT_VERSION}" -b "${ROOT_VERSION}-branch"
 popd || exit
 
@@ -36,9 +36,9 @@ cmake \
     -Droot7=ON \
     -DPYTHON_EXECUTABLE="$(pyenv which python)" \
     -DCMAKE_INSTALL_PREFIX="${HOME}/bin/root" \
-    -S root \
+    -S root_src \
     -B "root_build_${ROOT_VERSION}"
-cmake "root_build_${ROOT_VERSION}" -L
+cmake "root_build_${ROOT_VERSION}" -LH
 cmake --build "root_build_${ROOT_VERSION}" -- -j$(($(nproc) - 1))
 
 # cmake --build "root_build_${ROOT_VERSION}" --target install
