@@ -41,6 +41,6 @@ cmake \
 cmake "root_build_${ROOT_VERSION}" -L
 cmake --build "root_build_${ROOT_VERSION}" -- -j$(($(nproc) - 1))
 
-# cmake --build "root_build_${ROOT_VERSION}" --target install
+# cmake --install "root_build_${ROOT_VERSION}"
 
 unset ROOT_VERSION

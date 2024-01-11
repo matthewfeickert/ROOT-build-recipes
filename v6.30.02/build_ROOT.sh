@@ -47,6 +47,6 @@ cmake \
 if [ -d "${INSTALL_PREFIX}" ]; then
     rm -rf "${INSTALL_PREFIX}"
 fi
-cmake --build "root_build_${ROOT_VERSION}" --target install
+cmake --install "root_build_${ROOT_VERSION}"
 
 unset ROOT_VERSION
