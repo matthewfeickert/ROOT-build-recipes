@@ -2,9 +2,7 @@
 
 ## pyenv build configuration
 
-To get ROOT to build nicely and not get through the full build and then error at the end with something like
-
-[CPython will need to be built with the `--enable-shared` flag](https://github.com/pyenv/pyenv/wiki#how-to-build-cpython-with---enable-shared).
+To get ROOT to build nicely and not get through the full build and then error at the end, [CPython will need to be built with the `--enable-shared` flag](https://github.com/pyenv/pyenv/wiki#how-to-build-cpython-with---enable-shared).
 This can be done with pyenv by using the `PYTHON_CONFIGURE_OPTS` environmental variable
 
 ```shell
