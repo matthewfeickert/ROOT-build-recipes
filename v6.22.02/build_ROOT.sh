@@ -7,7 +7,7 @@ set -o pipefail
 
 ROOT_VERSION="v6-22-02"
 
-pushd root || exit
+pushd root_src || exit
 git checkout "${ROOT_VERSION}" -b "${ROOT_VERSION}-branch"
 popd || exit
 
@@ -17,6 +17,7 @@ if [ -d "root_build_${ROOT_VERSION}" ]; then
 fi
 
 # c.f. https://root.cern/install/build_from_source/#all-build-options
+INSTALL_PREFIX="${HOME}/bin/root-cern"
 cmake \
     -Dall=OFF \
     -Dsoversion=ON \
@@ -35,11 +36,14 @@ cmake \
     -Dtmva-gpu=OFF \
     -Droot7=ON \
     -DPYTHON_EXECUTABLE="$(pyenv which python)" \
-    -DCMAKE_INSTALL_PREFIX="${HOME}/bin/root" \
-    -S root \
+    -DCMAKE_INSTALL_PREFIX="${INSTALL_PREFIX}" \
+    -S root_src \
     -B "root_build_${ROOT_VERSION}"
-cmake "root_build_${ROOT_VERSION}" -L
-cmake --build "root_build_${ROOT_VERSION}" -- -j$(($(nproc) - 1))
+cmake "root_build_${ROOT_VERSION}" -LH
+cmake \
+    --build "root_build_${ROOT_VERSION}" \
+    --clean-first \
+    --parallel "$(nproc --ignore=2)"
 
 # cmake --install "root_build_${ROOT_VERSION}"
 
